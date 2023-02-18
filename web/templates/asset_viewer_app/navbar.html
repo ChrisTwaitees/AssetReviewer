@@ -1,0 +1,57 @@
+{% load static %}
+<nav id="navbar_assetview" class="navbar navbar-dark bg-dark navbar-expand-lg navbar-expand-md"
+     xmlns="http://www.w3.org/1999/html">
+    <!--icon and name-->
+    <div>
+        <a class="navbar-brand" href="#" style="font-size: xx-large;">
+            <img style="padding: 10px;" src="{% static "images/viewer_logo.png" %}" alt="Logo" width="60"
+            height="60">Asset Viewer</a>
+    </div>
+    <!--links-->
+    <ul class="navbar-nav flex-grow-1 justify-content-center">
+        <li>
+            <a class="nav-link" href="{% url 'index' %}">Assets</a>
+        </li>
+    </ul>
+    <!--search form-->
+    <div>
+        <span>
+          <form style="padding-right: 10px;" class="form-inline input-group">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button type="button" class="btn btn-primary">
+                <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+           <button type="button" class="btn btn-primary" onclick="testAddDirectory()" data-toggle="modal" data-target="#SettingsModal">
+                <i class="fa-solid fa-gear"></i>
+          </button>
+          </form>
+        </span>
+    </div>
+
+    <!-- settings modal -->
+    <div class="modal fade" id="SettingsModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Settings</h2>
+                </div>
+                <div class="modal-body">
+                    <h2>Search Directories</h2>
+                    <ul class="list-group">
+                        {% for root in settings.resource_directories %}
+                            <li class="list-group-item">{{root}}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h4>Add new directory Directories</h4>
+                    <input class="form-control" id="inputnewdirectory" type="text" placeholder="Default input">
+                    <button class="btn btn-primary" onclick="testAddDirectory">+</button>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

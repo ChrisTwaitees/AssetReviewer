@@ -1,0 +1,50 @@
+{% load static %}
+<div id="image_slideshow" style="float:left; width:25%; height:25%;">
+    <div id="AssetVideosCarousel{{ forloop.counter0 }}" class="carousel" data-ride="carousel"
+         data-interval="false">
+        <div class="carousel-inner" data-toggle="modal" data-target="#VideoModal{{ forloop.counter0 }}">
+            {% for asset in asset_group.video_assets%}
+            {% if forloop.first %}
+            <div class="carousel-item active">
+                {% else %}
+                <div class="carousel-item">
+                    {% endif %}
+                    <video class="img-fluid" autoplay loop muted>
+                        <source src="{% static asset.video_path %}" type="video/mp4"/>
+                    </video>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h6>{{ asset_group.name }}</h6>
+<!--                        <p>{{ asset.name }}</p>-->
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#AssetVideosCarousel{{ forloop.counter0 }}" role="button"
+               data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#AssetVideosCarousel{{ forloop.counter0 }}" role="button"
+               data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="modal fade" id="VideoModal{{ forloop.counter0 }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ asset_group.name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% include "asset_viewer_app/asset_views/video_carousel.html" %}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

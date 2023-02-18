@@ -1,0 +1,26 @@
+{% extends "asset_viewer_app/base_template.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="AssetData">
+    {% if asset_groups%}
+    <h2>Images</h2>
+    <div>
+        {% for asset_group in asset_groups.image_asset_groups %}
+        {% include "asset_viewer_app/asset_views/asset_images_view.html" %}
+        {% endfor %}
+    </div>
+
+    <h2>Videos</h2>
+    <div>
+        {% for asset_group in asset_groups.video_asset_groups %}
+        {% include "asset_viewer_app/asset_views/asset_videos_view.html" %}
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <h2>No assets found!</h2>
+    {% endif %}
+</div>
+{% endblock %}
